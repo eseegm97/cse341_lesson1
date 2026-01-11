@@ -1,0 +1,20 @@
+{
+  "name": "cse341_lesson1",
+  "version": "1.0.0",
+  "description": "lesson 1",
+  "homepage": "https://github.com/eseegm97/cse341_lesson1#readme",
+  "bugs": {
+    "url": "https://github.com/eseegm97/cse341_lesson1/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eseegm97/cse341_lesson1.git"
+  },
+  "license": "ISC",
+  "author": "Ethan Seegmiller",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  }
+}
