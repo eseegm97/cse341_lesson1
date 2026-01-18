@@ -7,31 +7,26 @@ let db;
 async function connectDB() {
     if (!db) {
         await client.connect();
-        db = client.db("cse341");
+        db = client.db("yourDBName");
         console.log("MongoDB connected!");
     }
     return db;
 }
 
 async function getAllContacts() {
-    try {
-        await client.connect();
-        const collection = client.db("cse341").collection("Contacts");
-        const contacts = await collection.find({}).toArray();
-        return contacts;
-    } finally {
-        await client.close();
-    }
+    const database = await connectDB();
+    const collection = database.collection("contacts");
+    return await collection.find({}).toArray();
 }
 
 async function getContactById(id) {
+    const database = await connectDB();
+    const collection = database.collection("contacts");
+
     try {
-        await client.connect();
-        const collection = client.db("cse341").collection("Contacts");
-        const contact = await collection.findOne({ _id: new ObjectId(id) });
-        return contact;
-    } finally {
-        await client.close();
+        return await collection.findOne({ _id: new ObjectId(id) });
+    } catch (err) {
+        return null;
     }
 }
 

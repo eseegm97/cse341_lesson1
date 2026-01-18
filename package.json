@@ -12,6 +12,9 @@
   },
   "license": "ISC",
   "author": "Ethan Seegmiller",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
