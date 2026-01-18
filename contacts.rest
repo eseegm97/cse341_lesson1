@@ -1,0 +1,11 @@
+### Get all contacts
+GET http://localhost:3000/contacts
+
+### Get first single contact by ID
+GET http://localhost:3000/contacts?id=696c1b18aa6332f616532ce2
+
+### Get second single contact by ID
+GET http://localhost:3000/contacts?id=696c1b18aa6332f616532ce3
+
+### Get third single contact by ID
+GET http://localhost:3000/contacts?id=696c1b18aa6332f616532ce4
