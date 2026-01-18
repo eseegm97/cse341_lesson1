@@ -1,5 +1,5 @@
 const http = require("http");
-const { getAllContacts, getContactById, closeDB } = require("./routes/contacts");
+const { getAllContacts, getContactById } = require("./routes/contacts");
 require("dotenv").config();
 
 const server = http.createServer(async (req, res) => {
@@ -55,9 +55,6 @@ const server = http.createServer(async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-
-process.on("SIGTERM", closeDB);
-process.on("SIGINT", closeDB);
 
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
