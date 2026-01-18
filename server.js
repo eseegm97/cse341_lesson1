@@ -1,5 +1,5 @@
 const http = require("http");
-const { getAllContacts, getContactById } = require("./routes/contacts");
+const { getAllContacts, getContactById, closeDB } = require("./routes/contacts");
 require("dotenv").config();
 
 const server = http.createServer(async (req, res) => {
@@ -21,9 +21,10 @@ const server = http.createServer(async (req, res) => {
         }
 
         if (req.url.startsWith("/contacts") && req.method === "GET") {
-            const protocol = req.headers['x-forwarded-proto'] || 'http';
-            const url = new URL(req.url, `${protocol}://${req.headers.host}`);
-            const id = url.searchParams.get("id");
+            const queryIndex = req.url.indexOf("?");
+            const id = queryIndex > -1 
+                ? new URLSearchParams(req.url.substring(queryIndex + 1)).get("id")
+                : null;
 
             let result;
 
@@ -49,11 +50,15 @@ const server = http.createServer(async (req, res) => {
     } catch (error) {
         console.error(error);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: "Internal Service Error" }));
+        res.end(JSON.stringify({ error: "Internal Server Error" }));
     }
 });
 
 const PORT = process.env.PORT || 3000;
+
+process.on("SIGTERM", closeDB);
+process.on("SIGINT", closeDB);
+
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

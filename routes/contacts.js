@@ -5,7 +5,15 @@ const client = new MongoClient(process.env.MONGODB_URI);
 let db;
 
 async function connectDB() {
-    if (db) return db;
+    if (db) {
+        try {
+            await client.db("admin").command({ ping: 1 });
+            return db;
+        } catch (err) {
+            console.warn("Connection lost, reconnecting...");
+            db = null;
+        }
+    }
     
     try {
         await client.connect();
@@ -15,6 +23,13 @@ async function connectDB() {
     } catch (err) {
         console.error("MongoDB connection failed:", err);
         throw err;
+    }
+}
+
+async function closeDB() {
+    if (client) {
+        await client.close();
+        console.log("MongoDB connection closed");
     }
 }
 
@@ -35,4 +50,4 @@ async function getContactById(id) {
     });
 }
 
-module.exports = { getAllContacts, getContactById };
+module.exports = { getAllContacts, getContactById, closeDB };
