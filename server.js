@@ -1,9 +1,17 @@
 const http = require("http");
 const { getAllContacts, getContactById } = require("./routes/contacts");
+require("dotenv").config();
 
 const server = http.createServer(async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") {
+        res.writeHead(204);
+        res.end();
+        return;
+    }
 
     try {
         if (req.url === "/name" && req.method === "GET") {
@@ -22,7 +30,7 @@ const server = http.createServer(async (req, res) => {
             if (id) {
                 result = await getContactById(id);
                 if (!result) {
-                    res.statusCode = 404;
+                    res.writeHead(404, { "Content-Type": "application/json" });
                     res.end(JSON.stringify({ error: "Contact not found or invalid ID" }));
                     return;
                 }
@@ -30,7 +38,7 @@ const server = http.createServer(async (req, res) => {
                 result = await getAllContacts();
             }
 
-            res.statusCode = 200;
+            res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify(result));
             return;
         }
@@ -39,8 +47,9 @@ const server = http.createServer(async (req, res) => {
         res.end("Not Found\n");
 
     } catch (error) {
-        res.statusCode = 500;
-        res.end(JSON.stringify({ error: error.message }));
+        console.error(error);
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Internal Service Error" }));
     }
 });
 

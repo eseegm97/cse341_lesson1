@@ -5,26 +5,34 @@ const client = new MongoClient(process.env.MONGODB_URI);
 let db;
 
 async function connectDB() {
-    if (!db) {
+    if (db) return db;
+    
+    try {
         await client.connect();
-        db = client.db("cse341");
+        db = client.db(process.env.DB_NAME);
         console.log("MongoDB connected!");
+        return db;
+    } catch (err) {
+        console.error("MongoDB connection failed:", err);
+        throw err;
     }
-    return db;
 }
 
 async function getAllContacts() {
     const database = await connectDB();
-    return await database.collection("contacts").find({}).toArray();
+    return database.collection("contacts").find({}).toArray();
 }
 
 async function getContactById(id) {
     const database = await connectDB();
-    try {
-        return await database.collection("contacts").findOne({ _id: new ObjectId(id) });
-    } catch {
+
+    if (!ObjectId.isValid(id)) {
         return null;
     }
+
+    return database.collection("contacts").findOne({
+        _id: new ObjectId(id)
+    });
 }
 
 module.exports = { getAllContacts, getContactById };
