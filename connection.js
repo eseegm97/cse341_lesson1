@@ -1,18 +1,16 @@
 require("dotenv").config();
-
 const { MongoClient } = require("mongodb");
 
-const uri = process.env.MONGODB_URI;
-
-const client = new MongoClient(uri);
+const client = new MongoClient(process.env.MONGODB_URI);
 
 async function main() {
     try {
         await client.connect();
         console.log("Connected to MongoDB!");
+        const databasesList = await client.db().admin().listDatabases();
 
-        await listDatabases(client);
-
+        console.log("Databases:");
+        databasesList.databases.forEach(db => console.log(` - ${db.name}`));
     } catch (error) {
         console.error("MongoDB connection error:", error);
     } finally {
@@ -22,10 +20,3 @@ async function main() {
 }
 
 main().catch(console.error);
-
-async function listDatabases(client){
-    databasesList = await client.db().admin().listDatabases();
- 
-    console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};

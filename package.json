@@ -3,20 +3,13 @@
   "version": "1.0.0",
   "description": "lesson 1",
   "homepage": "https://github.com/eseegm97/cse341_lesson1#readme",
-  "bugs": {
-    "url": "https://github.com/eseegm97/cse341_lesson1/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eseegm97/cse341_lesson1.git"
-  },
+  "bugs": { "url": "https://github.com/eseegm97/cse341_lesson1/issues" },
+  "repository": { "type": "git", "url": "git+https://github.com/eseegm97/cse341_lesson1.git" },
   "license": "ISC",
   "author": "Ethan Seegmiller",
-  "engines": {
-    "node": ">=18.0.0"
-  },
+  "engines": { "node": ">=18.0.0" },
   "type": "commonjs",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
