@@ -1,5 +1,5 @@
 const http = require('http');
-const { getAllContacts, getContactById } = require('./contacts');
+const { getAllContacts, getContactById } = require('./routes/contacts');
 
 const server = http.createServer(async (req, res) => {
     if (req.url === '/name' && req.method === 'GET') {
