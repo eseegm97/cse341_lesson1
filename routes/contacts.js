@@ -1,8 +1,17 @@
 const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config();
 
-const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri);
+const client = new MongoClient(process.env.MONGODB_URI);
+let db;
+
+async function connectDB() {
+    if (!db) {
+        await client.connect();
+        db = client.db("cse341");
+        console.log("MongoDB connected!");
+    }
+    return db;
+}
 
 async function getAllContacts() {
     try {
