@@ -6,22 +6,16 @@ let db;
 
 async function connectDB() {
     if (db) {
-        try {
-            await client.db("admin").command({ ping: 1 });
-            return db;
-        } catch (err) {
-            console.warn("Connection lost, reconnecting...");
-            db = null;
-        }
+        return db;
     }
     
     try {
         await client.connect();
         db = client.db(process.env.DB_NAME);
-        console.log("MongoDB connected!");
+        console.log("Connected to MongoDB");
         return db;
     } catch (err) {
-        console.error("MongoDB connection failed:", err);
+         console.error("Failed to connect to MongoDB:", err.message);
         throw err;
     }
 }
