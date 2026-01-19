@@ -1,3 +1,8 @@
+### From server.js 
+### Get name
+GET http://localhost:3000/name
+
+### From contacts.js
 ### Get all contacts
 GET http://localhost:3000/contacts
 
