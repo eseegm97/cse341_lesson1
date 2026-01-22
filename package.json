@@ -22,8 +22,12 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "mongodb": "^7.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.3",
+    "eslint": "^9.39.2",
+    "prettier": "^3.8.1"
   }
 }
