@@ -1,5 +1,5 @@
 const express = require("express");
-const contactsRoutes = require("./routes/contactsRoute");
+const contactsRoutes = require("./src/routes/contactsRoute");
 require("dotenv").config();
 
 const app = express();

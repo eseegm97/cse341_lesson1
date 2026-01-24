@@ -14,3 +14,30 @@ GET http://localhost:3000/contacts/696c1b18aa6332f616532ce3
 
 ### Get third single contact by ID
 GET http://localhost:3000/contacts/696c1b18aa6332f616532ce4
+
+### Create new contact
+POST http://localhost:3000/contacts
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john@example.com",
+  "favoriteColor": "Blue",
+  "birthday": "1990-01-01"
+}
+
+### Update a contact
+PUT http://localhost:3000/contacts/697531669f327f554b47e6c7
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "email": "jane@example.com",
+  "favoriteColor": "Green",
+  "birthday": "1992-05-15"
+}
+
+### Delete a contact
+DELETE http://localhost:3000/contacts/697531669f327f554b47e6c7
