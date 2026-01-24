@@ -1,6 +1,13 @@
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
 
+if (!process.env.MONGODB_URI) {
+    throw new Error("MONGODB_URI environment variable is not defined");
+}
+if (!process.env.DB_NAME) {
+    throw new Error("DB_NAME environment variable is not defined");
+}
+
 const client = new MongoClient(process.env.MONGODB_URI);
 let db;
 
