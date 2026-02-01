@@ -1,5 +1,7 @@
 const express = require("express");
 const contactsRoutes = require("./src/routes/contactsRoute");
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger-output.json');
 require("dotenv").config();
 
 const app = express();
@@ -13,6 +15,9 @@ app.get("/name", (req, res) => {
 });
 
 app.use("/contacts", contactsRoutes);
+
+// Swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // 404 handler
 app.use((req, res) => {
