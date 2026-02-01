@@ -6,7 +6,7 @@
     "version": "1.0.0"
   },
   "host": "localhost:3000",
-  "basePath": "/contacts",
+  "basePath": "/",
   "schemes": [
     "http"
   ],
@@ -47,8 +47,7 @@
                 "birthday": {
                   "example": "any"
                 }
-              },
-              "required": ["firstName", "lastName", "email", "favoriteColor", "birthday"]
+              }
             }
           }
         ],
@@ -118,8 +117,7 @@
                 "birthday": {
                   "example": "any"
                 }
-              },
-              "required": ["firstName", "lastName", "email", "favoriteColor", "birthday"]
+              }
             }
           }
         ],
